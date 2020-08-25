@@ -22,7 +22,7 @@ Copyright (C) 2008 Francesco Pasqualini
 
 -->
 
-		<title>Bucket listing</title>
+		<title>File Listing</title>
 <SCRIPT>
 
 //document.write(window.location.search);
@@ -121,6 +121,10 @@ fileList.sort(getSort());
 //document.write(getSort());
 for(i=0; i<fileList.length; i++){ //length is the same as count($array)
         fileData = fileList[i];
+// AIKON version: don't show html files such as the present one
+        omitregexp = /.*\.html/;
+        if (fileData[0].match(omitregexp)) { continue; }
+		
         name = fileData[0];
         size = fileData[1];
         lastmod = fileData[2];
@@ -182,7 +186,7 @@ function getSort(){
 
 
 function getLink(){
-  return "             "+getLinkSize() + "  " + getLinkLastmod() + "              " + getLinkName() + "   " ;
+  return "             "+ getLinkSize() + "  " + getLinkLastmod() + "             " + getLinkName() + "   " ;
 }
 
 function getNextSortDir(sortCol){
@@ -192,13 +196,13 @@ function getNextSortDir(sortCol){
 }
 
 function getLinkSize(){
-  return "<A HREF=\"?sort=size&sortdir=" +getNextSortDir('size') +"\">Size</A>";
+  return "<A HREF=\"?sort=size&sortdir=" +getNextSortDir('size') +"\"><b>Size</b></A>";
 }
 function getLinkName(){
-  return "<A HREF=\"?sort=name&sortdir=" +getNextSortDir('name') +"\">Name</A>";
+  return "<A HREF=\"?sort=name&sortdir=" +getNextSortDir('name') +"\"><b>Deterministic Snapshot File</b></A>";
 }
 function getLinkLastmod(){
-  return "<A HREF=\"?sort=lastmod&sortdir=" +getNextSortDir('lastmod') +"\">Lastmodified</A>";
+  return "<A HREF=\"?sort=lastmod&sortdir=" +getNextSortDir('lastmod') +"\"><b>Last Modified</b></A>";
 }
 
 
